@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 
 interface Result {
   valor_risco: number;
@@ -53,13 +54,27 @@ export default function HypertensionForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 mt-10">
-      <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="max-w-md mx-auto bg-white shadow-lg rounded-2xl p-6 mt-10"
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="text-2xl font-bold text-gray-800 text-center mb-4"
+      >
         Diagnóstico Fuzzy de Hipertensão
-      </h2>
+      </motion.h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Pressão Sistólica (mmHg)
           </label>
@@ -72,9 +87,13 @@ export default function HypertensionForm() {
             max={200}
             required
           />
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Pressão Diastólica (mmHg)
           </label>
@@ -87,9 +106,13 @@ export default function HypertensionForm() {
             max={130}
             required
           />
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
           <label className="block text-sm font-medium text-gray-700 mb-1">Idade</label>
           <input
             type="number"
@@ -100,19 +123,26 @@ export default function HypertensionForm() {
             max={120}
             required
           />
-        </div>
+        </motion.div>
 
-        <button
+        <motion.button
+          whileTap={{ scale: 0.9, rotate: -1.5, transition: { duration: 0.2, ease: "easeInOut" } }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           type="submit"
           className="w-full bg-blue-600 text-white rounded-xl py-2 font-semibold hover:bg-blue-700 transition disabled:opacity-50"
           disabled={loading}
         >
           {loading ? "Calculando..." : "Avaliar"}
-        </button>
+        </motion.button>
       </form>
 
       {result && (
-        <div className="mt-6 p-4 border rounded-xl bg-gray-50">
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="mt-6 p-4 border rounded-xl bg-gray-50"
+        >
           {result.error ? (
             <p className="text-red-600 text-center">{result.error}</p>
           ) : (
@@ -133,8 +163,8 @@ export default function HypertensionForm() {
               </p>
             </>
           )}
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
